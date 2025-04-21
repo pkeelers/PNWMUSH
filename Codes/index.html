@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mushroom Market</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-gray-200 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-black">Mushroom Market</h1>
+      <div class="flex items-center space-x-6">
+        <a href="#" id="home-tab" class="text-gray-700 hover:text-black transition-colors">Home</a>
+        <a href="#" id="products-tab" class="text-gray-700 hover:text-black transition-colors">Products</a>
+        <a href="#" id="about-tab" class="text-gray-700 hover:text-black transition-colors">About Us</a>
+        <button id="cart-toggle" class="relative">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto p-8">
+    <!-- Home Section -->
+    <div id="home-section" class="hidden">
+      <h2 class="section-title">Welcome to Mushroom Market</h2>
+      <p class="section-text">Explore our premium selection of gourmet and medicinal mushrooms, cultivated with care for quality and sustainability.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        <div>
+          <img src="https://via.placeholder.com/300?text=Close-up+Bluey+Vuitton+Mushroom+Dark+Brown+Cap+Blue+Tinge" alt="Bluey Vuitton Mushroom" class="w-full h-48 object-cover mushroom-image">
+          <p class="text-center text-gray-600 mt-2">Bluey Vuitton</p>
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300?text=Close-up+Penis+Envy+Mushroom+Thick+Stem+Dark+Brown+Cap" alt="Penis Envy Mushroom" class="w-full h-48 object-cover mushroom-image">
+          <p class="text-center text-gray-600 mt-2">Penis Envy</p>
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300?text=Close-up+Albino+Bluey+Vuitton+Mushroom+Pale+White+Cap" alt="Albino Bluey Vuitton Mushroom" class="w-full h-48 object-cover mushroom-image">
+          <p class="text-center text-gray-600 mt-2">Albino Bluey Vuitton</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Section -->
+    <div id="products-section">
+      <!-- Dropdown Filter -->
+      <div class="mb-6">
+        <label for="category-filter" class="text-lg font-semibold text-black mr-2">Filter by Category:</label>
+        <select id="category-filter" class="border border-gray-300 rounded-sm p-2 focus:outline-none focus:ring-2 focus:ring-black">
+          <option value="all">All Products</option>
+          <option value="liquid-culture">Liquid Culture</option>
+          <option value="substrate">Substrate</option>
+        </select>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Products will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div id="about-section" class="hidden">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-text">
+        At [Farm Name], our mission is to cultivate the highest quality gourmet and medicinal mushrooms through sustainable, innovative, and environmentally responsible farming practices. We are committed to enriching our community with fresh, flavorful, and nutrient-rich fungi, while supporting local ecosystems and promoting health and wellness through every harvest.
+      </p>
+      <div class="mt-6">
+        <img src="https://via.placeholder.com/600x300?text=Clean+Laboratory+with+White+Surfaces+Scientific+Equipment+Person+in+Lab+Coat" alt="Clean Laboratory" class="w-full h-64 object-cover lab-image">
+      </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-96 bg-white shadow-xl p-8 transform translate-x-full transition-transform duration-300">
+      <h2 class="text-2xl font-semibold text-black mb-6">Your Cart</h2>
+      <button id="close-cart" class="absolute top-4 right-4 text-gray-600 hover:text-black">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div id="cart-items" class="space-y-6"></div>
+      <div class="mt-8">
+        <p class="font-semibold text-black">Total: $<span id="cart-total">0.00</span></p>
+        <button id="checkout-btn" class="w-full btn-primary mt-6">Proceed to Checkout</button>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+      <div class="bg-white p-8 rounded-sm w-full max-w-md">
+        <h2 class="text-2xl font-semibold text-black mb-6">Checkout</h2>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+          <input id="checkout-name" type="text" class="w-full border border-gray-300 rounded-sm p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-black" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+          <input id="checkout-address" type="text" class="w-full border border-gray-300 rounded-sm p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-black" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+          <select id="checkout-payment" class="w-full border border-gray-300 rounded-sm p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-black">
+            <option value="credit">Credit Card</option>
+            <option value="paypal">PayPal</option>
+          </select>
+        </div>
+        <div class="flex justify-end space-x-4">
+          <button id="cancel-checkout" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-sm hover:bg-gray-300 transition-colors">Cancel</button>
+          <button id="submit-checkout" class="px-6 py-3 btn-primary">Place Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
